@@ -5,10 +5,28 @@
 
   <app-auth />
 
-  @if (isAdmin()) {
+  <!-- @if (isAdmin()) {
   <p>Only admins should see this!</p>
-  }
+  } -->
 
   <!-- <p *ngIf="isAdmin()">Only admins should see this!</p> -->
+
   <!-- structural directive -->
+  <!-- <ng-template appAuth="admin">
+    <p>Only admins should see this!</p>
+  </ng-template> -->
+
+  <!-- this is syntactic sugar for using ng-template -->
+  <!-- it wil automatically set up property binding as if you were using square brackets -->
+  <!-- like: [appAuth] -->
+  <!-- so the content between the quotes is evaluated as TypeScript code, instead as a string -->
+  <p *appAuth="'admin'" class="protected-content admin">
+    Only admins should see this!
+  </p>
+  <p *appAuth="'user'" class="protected-content unauthenticated">
+    Regular users should see this!
+  </p>
+  <p *appAuth="'guest'" class="protected-content authenticated">
+    Guest users should see this!
+  </p>
 </main>
